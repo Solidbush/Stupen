@@ -1,22 +1,15 @@
+from initialData import *  # Входные данные
 import numpy as np  # Для работы с массивами данных
-import matplotlib.pyplot as plt  # Для работы с графиками
-from sklearn.datasets import make_circles  # Импортирование данных
 from sklearn.neighbors import KNeighborsClassifier  # Реализация модели KNN
 from sklearn.model_selection import GridSearchCV  # Гиперпараметрическая оптимизация
 from plotDecisionRegions import plot_decision_regions
-
-X, y = make_circles(n_samples=512, random_state=123, noise=0.22, factor=0.16)
-plt.figure()
-plt.scatter(X[y == 0, 0], X[y == 0, 1], color='red', marker='^', alpha=0.5, label='0')
-plt.scatter(X[y == 1, 0], X[y == 1, 1], color='blue', marker='o', alpha=0.5, label='1')
-plt.legend()
-plt.title("Исходные данные")
-plt.show()
-
 from sklearn.model_selection import train_test_split  # Разделение данных на тренировочную и тестовую выборки
+from sklearn.preprocessing import StandardScaler  # Масштабирование (стандартизация) признаков
+
+# Разделение данных на тренировочную и тестовую выборки
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
-from sklearn.preprocessing import StandardScaler  # Масштабирование (стандартизация) признаков
+# Масштабирование (стандартизация) признаков
 sc = StandardScaler()
 sc.fit(X_train)
 X_train_std = sc.transform(X_train)
